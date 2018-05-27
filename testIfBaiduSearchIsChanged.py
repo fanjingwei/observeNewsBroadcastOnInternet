@@ -20,19 +20,19 @@ class SimpleWidgetTestCase(unittest.TestCase):
 		self.assertNotEqual(None, inputElement)
 		inputElement.send_keys("范璟玮")
 		inputElement.send_keys(Keys.RETURN)
-		time.sleep(2)
+		time.sleep(1)
 
 		num = self.browser.find_elements_by_class_name("nums_text")
 		self.assertEqual(1,len(num))
 		searchTool = self.browser.find_element_by_class_name("search_tool")
 		self.assertNotEqual(None, searchTool)
 		searchTool.click()
-		time.sleep(2)
+		time.sleep(1)
 
 		searchTool_Time = self.browser.find_element_by_class_name("search_tool_tf")
 		self.assertNotEqual(None, searchTool_Time)
 		searchTool_Time.click()
-		time.sleep(2)
+		time.sleep(1)
 
 		startTime = self.browser.find_elements_by_name("st")
 		self.assertEqual(1,len(startTime))
@@ -45,10 +45,13 @@ class SimpleWidgetTestCase(unittest.TestCase):
 		submit = self.browser.find_element_by_class_name("c-tip-custom-submit")
 		self.assertNotEqual(None, submit)
 		submit.click()
-		time.sleep(2)
+		time.sleep(1)
 
 		results = self.browser.find_elements_by_class_name("result")
 		self.assertEqual(2,len(results))
+		resultNum = self.browser.find_element_by_class_name("nums_text")
+		#该项此时被隐藏，需要使用get_attribute("innerHTML")方式获取
+		self.assertEqual("百度为您找到相关结果约2个",resultNum.get_attribute("innerHTML"))
 
 
 if __name__ == '__main__':
